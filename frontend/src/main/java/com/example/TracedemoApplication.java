@@ -39,6 +39,13 @@ public class TracedemoApplication {
 
     @RequestMapping("/work")
     public Trace callHome() {
+        // calc
+        int sum = 0;
+        for (int i = 0; i < 10000; ++i) {
+            sum += i;
+        }
+
+        // trace
         Trace trace = new Trace();
         trace.add("Frontend at: " + System.currentTimeMillis());
         trace = restTemplate.postForObject("http://localhost:8090/expand", trace, Trace.class);
